@@ -19,6 +19,7 @@ INDENT_WIDTH=8
 mkdir $BASE
 mkdir $BASE/{build,include,src}
 touch $BASE/src/main.c
+touch $BASE/Makefile
 
 printf "#include <stdio.h>
 
@@ -26,6 +27,40 @@ int main(){
     puts(\"Hello from Bootstrap!\")
     return 0;
 }" > $BASE/src/main.c
+
+printf "CC      := gcc
+CFLAGS  := -Wall -Wextra -g -Iinclude
+SRCDIR  := src
+INCDIR  := include
+OBJDIR  := build
+TARGET  := $BASE
+
+SOURCES := \$(wildcard \$(SRCDIR)/*.c)
+OBJECTS := \$(patsubst \$(SRCDIR)/%.c,\$(OBJDIR)/%.o,\$(SOURCES))
+DEPFILES := \$(OBJECTS:.o=.d)
+
+\$(TARGET): \$(OBJECTS)
+	\$(CC) \$(CFLAGS) -o \$@ $^
+
+\$(OBJDIR)/%.o: \$(SRCDIR)/%.c | \$(OBJDIR)
+	\$(CC) \$(CFLAGS) -MT \$@ -MMD -MP -MF \$(OBJDIR)/\$*.d -c $< -o \$@
+
+
+$\(OBJDIR):
+	@mkdir -p \$@
+
+-include \$(DEPFILES)
+
+.PHONY: all clean run
+
+all: \$(TARGET)
+
+clean:
+	rm -rf \$(OBJDIR) \$(TARGET)
+
+run: \$(TARGET)
+	./\$(TARGET)
+" > $BASE/Makefile
 
 clang-format --style="{ BasedOnStyle: $CLANG_FORMAT_STYLE, IndentWidth: $INDENT_WIDTH }" --assume-filename=.c \
 --dump-config > $BASE/_clang-format
