@@ -3,7 +3,7 @@
 # Generate a temple for C project
 # base_dir
 #   src/
-        main.c
+#       main.c
 #   include/
 #   Makefile
 #   build/
@@ -23,9 +23,9 @@ touch $BASE/src/main.c
 printf "#include <stdio.h>
 
 int main(){
-    printf(\"Hello from Bootstrap!\n\");
+    puts(\"Hello from Bootstrap!\")
     return 0;
-}" >> $BASE/src/main.c
+}" > $BASE/src/main.c
 
 clang-format --style="{ BasedOnStyle: $CLANG_FORMAT_STYLE, IndentWidth: $INDENT_WIDTH }" --assume-filename=.c \
 --dump-config > $BASE/_clang-format
