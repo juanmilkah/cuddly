@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+# Generate a temple for C project
+# base_dir
+#   src/
+        main.c
+#   include/
+#   Makefile
+#   build/
+#   _clang-format
+
+set -e
+
+BASE=$1
+CLANG_FORMAT_STYLE=llvm
+INDENT_WIDTH=8
+
+# I wanna break if the dir exists to avoid overriding existing files
+mkdir $BASE
+mkdir $BASE/{build,include,src}
+touch $BASE/src/main.c
+
+printf "#include <stdio.h>
+
+int main(){
+    printf(\"Hello from Bootstrap!\n\");
+    return 0;
+}" >> $BASE/src/main.c
+
+clang-format --style="{ BasedOnStyle: $CLANG_FORMAT_STYLE, IndentWidth: $INDENT_WIDTH }" --assume-filename=.c \
+--dump-config > $BASE/_clang-format
