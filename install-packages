@@ -1,10 +1,13 @@
 #!/usr/bin/env bash
 
+set -e
+
 sudo pacman -S --needed \
+base-devel \
+git \
 fzf \
 ripgrep \
 jq \
-thunar \
 cmatrix \
 tmux \
 feh \
@@ -26,11 +29,28 @@ i3blocks \
 bat \
 tokei \
 fastfetch \
-helix \
 mako \
 kitty \
 wl-clipboard \
 sudo-rs \
 zoxide \
 tree \
-ffmpeg
+ffmpeg \
+vlc \
+vlc-plugin-ffmpeg \
+xdg-desktop-portal-wlr
+
+echo "Setting up Yay!"
+
+dir=$(pwd)
+
+# Install Yay
+git clone https://aur.archlinux.org/yay.git ~/yay
+cd ~/yay
+makepkg -si
+cd $dir
+yay --version
+
+yay -S --needed \
+oxygen-cursors \
+librewolf-bin
