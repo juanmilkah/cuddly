@@ -38,7 +38,8 @@ tree \
 ffmpeg \
 vlc \
 vlc-plugin-ffmpeg \
-xdg-desktop-portal-wlr
+xdg-desktop-portal-wlr \
+rsync
 
 echo "Setting up Yay!"
 

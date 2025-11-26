@@ -12,7 +12,7 @@
 set -e
 
 BASE=$1
-CLANG_FORMAT_STYLE=llvm
+CLANG_FORMAT_STYLE=webkit
 INDENT_WIDTH=8
 
 # I wanna break if the dir exists to avoid overriding existing files
@@ -62,5 +62,5 @@ run: \$(TARGET)
 	./\$(TARGET)
 " > $BASE/Makefile
 
-clang-format --style="{ BasedOnStyle: $CLANG_FORMAT_STYLE, IndentWidth: $INDENT_WIDTH }" --assume-filename=.c \
---dump-config > $BASE/_clang-format
+clang-format --style="{ BasedOnStyle: $CLANG_FORMAT_STYLE, IndentWidth: $INDENT_WIDTH , PointerAlignment: Right}" \
+    --assume-filename=.c --dump-config > $BASE/_clang-format
