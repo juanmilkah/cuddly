@@ -24,7 +24,7 @@ touch $BASE/Makefile
 printf "#include <stdio.h>
 
 int main(){
-    puts(\"Hello from Bootstrap!\")
+    puts(\"Hello from Bootstrap!\");
     return 0;
 }" > $BASE/src/main.c
 
