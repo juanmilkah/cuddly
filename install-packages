@@ -39,7 +39,10 @@ ffmpeg \
 vlc \
 vlc-plugin-ffmpeg \
 xdg-desktop-portal-wlr \
-rsync
+rofi \
+newsboat \
+rsync \
+gammastep
 
 echo "Setting up Yay!"
 
@@ -54,4 +57,5 @@ yay --version
 
 yay -S --needed \
 oxygen-cursors \
-librewolf-bin
+librewolf-bin \
+libreoffice
