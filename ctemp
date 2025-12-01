@@ -12,8 +12,6 @@
 set -e
 
 BASE=$1
-CLANG_FORMAT_STYLE=webkit
-INDENT_WIDTH=8
 
 # I wanna break if the dir exists to avoid overriding existing files
 mkdir $BASE
@@ -62,5 +60,22 @@ run: \$(TARGET)
 	./\$(TARGET)
 " > $BASE/Makefile
 
-clang-format --style="{ BasedOnStyle: $CLANG_FORMAT_STYLE, IndentWidth: $INDENT_WIDTH , PointerAlignment: Right}" \
-    --assume-filename=.c --dump-config > $BASE/_clang-format
+printf "BasedOnStyle: LLVM
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+BreakBeforeBraces: Attach
+AllowShortIfStatementsOnASingleLine: AllIfsAndElse
+AllowShortLoopsOnASingleLine: true
+AllowShortCaseLabelsOnASingleLine: true
+ColumnLimit: 100
+PointerAlignment: Left
+SpacesInParentheses: false
+SpaceAfterCStyleCast: true
+IncludeBlocks: Regroup
+AlignConsecutiveDeclarations: AcrossEmptyLinesAndComments
+AlignConsecutiveAssignments: AcrossEmptyLinesAndComments
+AlignTrailingComments: true
+CompactNamespaces: false
+IndentCaseLabels: true
+" > $BASE/.clang-format
