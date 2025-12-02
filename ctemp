@@ -73,8 +73,8 @@ PointerAlignment: Left
 SpacesInParentheses: false
 SpaceAfterCStyleCast: true
 IncludeBlocks: Regroup
-AlignConsecutiveDeclarations: AcrossEmptyLinesAndComments
-AlignConsecutiveAssignments: AcrossEmptyLinesAndComments
+AlignConsecutiveDeclarations: Consecutive
+AlignConsecutiveAssignments: Consecutive
 AlignTrailingComments: true
 CompactNamespaces: false
 IndentCaseLabels: true
